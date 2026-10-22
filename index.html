@@ -59,15 +59,22 @@
 	display: none;
   }
   .wave.w2 { bottom: 4%; left: 12%; transform: rotate(-3deg); opacity: .6; }
-  .content {
+	.content {
 	  position: absolute;
-	  inset: 0;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+
 	  display: flex;
 	  flex-direction: column;
 	  justify-content: center;
 	  align-items: center;
 	  text-align: center;
-  }
+
+	  padding: 4vh 4vw;
+	  z-index: 3;
+	}
   .eyebrow {
     font-size: clamp(30px, 1.1vw, 22px); letter-spacing: .28em;
     text-transform: uppercase; color: var(--mint); font-weight: 650;
@@ -83,14 +90,15 @@
   }
   .sub { margin-top: 1vh; color: rgba(255,253,248,.76); font-size: clamp(12px, 1vw, 20px); }
   .countdown {
-	  width: 80%;
-	  display: flex;
-	  justify-content: center;
-	  gap: 20px;
+    display: grid; grid-template-columns: repeat(4, minmax(90px, 1fr));
+    gap: clamp(8px, 1.3vw, 24px); width: min(78vw, 1100px);
+    margin-top: 5vh;
   }
   .unit {
-	  flex: 1;
-	  min-width: 0;
+    padding: clamp(12px, 1.5vw, 25px) 8px clamp(10px, 1.2vw, 20px);
+    border: 1px solid rgba(255,255,255,.19); border-radius: 15px;
+    background: rgba(2,31,33,.38); backdrop-filter: blur(6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
   }
   .number {
     font-variant-numeric: tabular-nums; font-weight: 750;
@@ -126,6 +134,7 @@
     .unit { border-radius: 10px; }
     .sun { right: -2%; top: 7%; width: 42vw; }
   }
+
 </style>
 </head>
 <body>
@@ -137,7 +146,7 @@
     <path d="M7 52 L42 45 L56 12 Q60 5 65 10 L62 42 L89 34 Q97 32 97 38 L96 43 L62 57 L58 83 Q57 89 52 85 L44 62 L14 69 Z" fill="#fffdf8"/>
   </svg>
   <main class="content">
-    <div class="eyebrow">MBI & HTSA · YEAR END CELEBRATION 2026</div>
+    <div class="eyebrow">MBI & HSTA · YEAR END CELEBRATION 2026</div>
     <div class="tagline">ANDA LAYAK DAPAT BINTANG</div>
     <div class="sub">the countdown to Bali has officially begins</div>
     <section class="countdown" aria-label="Countdown to YEP">

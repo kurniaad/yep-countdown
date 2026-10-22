@@ -315,6 +315,11 @@ function updateBackground() {
 // Apply immediately and check every minute
 updateBackground();
 setInterval(updateBackground, 60000);
+
+document.title =
+  "YEP | " +
+  window.innerWidth + " x " +
+  window.innerHeight;
 </script>
 </body>
 </html>

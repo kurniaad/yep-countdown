@@ -190,11 +190,15 @@ function updateBackground() {
     image = "YEP-countdown-night.png";
   }
 
+  const imageUrl = new URL(image, document.baseURI).href;
+
   document.body.style.backgroundImage =
     'linear-gradient(rgba(4,35,38,0.35), rgba(4,35,38,0.55)), ' +
-    'url("./' + image + '")';
+    'url("' + imageUrl + '")';
 
-  console.log("Current background:", image);
+  document.body.style.backgroundPosition = "center center";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundRepeat = "no-repeat";
 }
 
 updateBackground();

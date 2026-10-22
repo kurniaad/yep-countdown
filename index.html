@@ -220,28 +220,39 @@ html, body {
     Format: YYYY-MM-DDTHH:MM:SS+08:00 for Bali local time (WITA).
     Example only: 2026-12-18T18:00:00+08:00
   */
-  const EVENT_DATE = "2026-12-16T18:00:00+08:00"; // CHANGE TO CONFIRMED EVENT DATE
+var EVENT_DATE = "2026-12-16T18:00:00+08:00";
+var target = new Date(EVENT_DATE).getTime();
 
-  const target = new Date(EVENT_DATE).getTime();
-  const pad = n => String(n).padStart(2, "0");
-  function updateCountdown() {
-    const diff = target - Date.now();
-    if (!Number.isFinite(target)) return;
-    if (diff <= 0) {
-      document.getElementById("scene").classList.add("finished");
-      return;
-    }
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-    document.getElementById("days").textContent = String(days).padStart(2, "0");
-    document.getElementById("hours").textContent = pad(hours);
-    document.getElementById("minutes").textContent = pad(minutes);
-    document.getElementById("seconds").textContent = pad(seconds);
+function updateCountdown() {
+  var now = new Date().getTime();
+  var diff = target - now;
+
+  if (isNaN(target)) {
+    document.getElementById("days").innerHTML = "ERR";
+    return;
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  if (diff <= 0) {
+    document.getElementById("days").innerHTML = "00";
+    document.getElementById("hours").innerHTML = "00";
+    document.getElementById("minutes").innerHTML = "00";
+    document.getElementById("seconds").innerHTML = "00";
+    return;
+  }
+
+  var days = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var minutes = Math.floor((diff % 3600000) / 60000);
+  var seconds = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = ("0" + hours).slice(-2);
+  document.getElementById("minutes").innerHTML = ("0" + minutes).slice(-2);
+  document.getElementById("seconds").innerHTML = ("0" + seconds).slice(-2);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
   
 // Automatic background based on local device time
 // Automatic background based on local device time
@@ -257,23 +268,23 @@ function updateBackground() {
     image = "YEP-countdown-night.png";
   }
 
-  var img = new Image();
+var testImage = new Image();
 
-  img.onload = function () {
-    document.body.style.backgroundImage =
-      'linear-gradient(rgba(4,35,38,0.35), rgba(4,35,38,0.55)), url("' +
-      img.src + '")';
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundRepeat = "no-repeat";
-  };
+testImage.onload = function() {
+  document.body.style.backgroundImage =
+    'url("' + testImage.src + '")';
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center center";
+  document.body.style.backgroundRepeat = "no-repeat";
+};
 
-  img.onerror = function () {
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "#062f32";
-  };
+testImage.onerror = function() {
+  document.getElementById("dateNote").innerHTML =
+    "BACKGROUND IMAGE NOT FOUND";
+  document.getElementById("dateNote").style.display = "block";
+};
 
-  img.src = image;
+testImage.src = "YEP-countdown-night.png";
 }
 
 updateBackground();

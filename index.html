@@ -123,42 +123,16 @@
     .sun { right: -2%; top: 7%; width: 42vw; }
   }
 
-/* Legacy Tizen Browser compatibility */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.scene {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-}
-
-.content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
+/* YEP Video Wall - balanced layout */
 .eyebrow {
   font-size: 24px;
+  letter-spacing: 0.22em;
   max-width: 90%;
 }
 
 .tagline {
-  font-size: 42px;
+  font-size: 48px;
+  letter-spacing: 0.12em;
   max-width: 90%;
 }
 
@@ -168,27 +142,33 @@ html, body {
 
 .countdown {
   display: flex;
-  width: 85%;
-  max-width: none;
-  gap: 16px;
-  margin-top: 40px;
+  width: 82%;
+  max-width: 1400px;
+  gap: 20px;
+  margin-top: 45px;
 }
 
 .unit {
   flex: 1;
   min-width: 0;
-  padding: 24px 8px;
-  background: rgba(2, 31, 33, 0.75);
+  padding: 28px 12px 24px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 16px;
+  background: rgba(2,31,33,0.60);
   backdrop-filter: none;
 }
 
 .number {
-  font-size: 64px;
-  line-height: 1.2;
+  font-size: 76px;
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
 }
 
 .label {
+  margin-top: 12px;
   font-size: 16px;
+  letter-spacing: 0.18em;
 }
 </style>
 </head>
@@ -268,25 +248,16 @@ function updateBackground() {
     image = "YEP-countdown-night.png";
   }
 
-var testImage = new Image();
-
-testImage.onload = function() {
   document.body.style.backgroundImage =
-    'url("' + testImage.src + '")';
+    'linear-gradient(rgba(4,35,38,0.35), rgba(4,35,38,0.55)), ' +
+    'url("' + image + '")';
+
   document.body.style.backgroundSize = "cover";
   document.body.style.backgroundPosition = "center center";
   document.body.style.backgroundRepeat = "no-repeat";
-};
-
-testImage.onerror = function() {
-  document.getElementById("dateNote").innerHTML =
-    "BACKGROUND IMAGE NOT FOUND";
-  document.getElementById("dateNote").style.display = "block";
-};
-
-testImage.src = "YEP-countdown-night.png";
 }
 
+// Apply immediately and check every minute
 updateBackground();
 setInterval(updateBackground, 60000);
 </script>

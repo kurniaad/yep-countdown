@@ -5,7 +5,17 @@
 <title>YEP!! Bali Countdown</title>
 
 <style type="text/css">
-
+/* 1. DEKLARASI FONT FACE LOKAL (Paling Aman untuk Browser TV) */
+@font-face {
+	font-family: 'CountdownFont';
+	/* Arahkan ke folder tempat Anda menyimpan file font */
+	src: url('anton.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	/* font-display swap memaksa TV menampilkan teks secara instan */
+	font-display: swap; 
+}
+	
 /* BASIC RESET */
 
 * {
@@ -106,7 +116,7 @@ html, body {
 }
 
 .days-number {
-    font-family: "Arial Black", "sans-serif-condensed", sans-serif;
+    font-family: 'CountdownFont', "Arial Black", "sans-serif-condensed", sans-serif;
     font-size: 690px;
     line-height: 1;
     font-weight: bold;

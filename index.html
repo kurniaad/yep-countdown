@@ -5,17 +5,18 @@
 <title>YEP!! Bali Countdown</title>
 
 <style type="text/css">
-/* 1. DEKLARASI FONT FACE LOKAL (Paling Aman untuk Browser TV) */
+
+/* =====================================
+   LOCAL FONT
+   ===================================== */
+
 @font-face {
-	font-family: 'CountdownFont';
-	/* Arahkan ke folder tempat Anda menyimpan file font */
-	src: url('anton.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	/* font-display swap memaksa TV menampilkan teks secara instan */
-	font-display: swap; 
+    font-family: 'CountdownFont';
+    src: url('anton.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
 }
-	
+
 /* BASIC RESET */
 
 * {
@@ -32,7 +33,9 @@ html, body {
     color: #ffffff;
 }
 
-/* BACKGROUND VIDEO */
+/* =====================================
+   BACKGROUND IMAGE
+   ===================================== */
 
 .background {
     position: absolute;
@@ -43,23 +46,7 @@ html, body {
     z-index: 0;
     overflow: hidden;
     background-color: #102d2b;
-    background-image: url("bali-background.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 }
-
-.background video {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* IMAGE BACKGROUND */
 
 .background img {
     position: absolute;
@@ -81,7 +68,24 @@ html, body {
     opacity: 0.2;
 }
 
-/* MAIN CONTAINER */
+/* =====================================
+   HOURLY VIDEO PLAYER
+   ===================================== */
+
+#hourlyVideo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    display: none;
+    background-color: #000000;
+}
+
+/* =====================================
+   MAIN COUNTDOWN CONTAINER
+   ===================================== */
 
 .container {
     position: absolute;
@@ -102,7 +106,7 @@ html, body {
     font-style: italic;
     font-weight: normal;
     color: #ffffff;
-	text-shadow: 2px 2px 10px #666666;
+    text-shadow: 2px 2px 10px #666666;
 }
 
 /* DAYS AREA */
@@ -116,26 +120,26 @@ html, body {
 }
 
 .days-number {
-    font-family: 'CountdownFont', "Arial Black", "sans-serif-condensed", sans-serif;
+    font-family: Impact, Arial, sans-serif;
     font-size: 690px;
     line-height: 1;
     font-weight: bold;
     letter-spacing: 5px;
     color: #ffffff;
     white-space: nowrap;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
 
 .days-label {
     position: absolute;
     left: 105%;
     bottom: 2.5%;
-    font-family: 'CountdownFont', Impact, "Aptos", sans-serif;
+    font-family: Impact, Arial, sans-serif;
     font-size: 100px;
     line-height: 1.05;
     color: #ffffff;
     white-space: nowrap;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
 
 /* EVENT TITLE */
@@ -149,21 +153,21 @@ html, body {
 }
 
 .event-name {
-    font-family: 'CountdownFont', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 40px;
     line-height: 1.1;
     margin-bottom: 10px;
     color: #ffffff;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
 
 .event-headline {
-    font-family: 'CountdownFont', Impact, "Anton", sans-serif;
+    font-family: Impact, Arial, sans-serif;
     font-size: 90px;
     line-height: 1;
     color: #ffffff;
     text-transform: uppercase;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
 
 /* COUNTDOWN TIMER */
@@ -184,59 +188,66 @@ html, body {
 }
 
 .timer-value {
-    font-family: 'CountdownFont', Impact, "Anton", sans-serif;
+    font-family: Impact, Arial, sans-serif;
     font-size: 80px;
     line-height: 1;
     font-weight: bold;
     letter-spacing: 3px;
     color: #ffffff;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
 
 .timer-label {
     margin-top: 12px;
-    font-family: 'CountdownFont', Impact, "Anton", sans-serif;
+    font-family: Impact, Arial, sans-serif;
     font-size: 40px;
     line-height: 1.2;
     color: #ffffff;
-	text-shadow: 5px 5px 10px black;
+    text-shadow: 5px 5px 10px black;
 }
-
-/* END */
 
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
+<!-- =====================================
+     BACKGROUND IMAGE
+     ===================================== -->
 
-<div class="background" id="background">
-
-    <!-- VIDEO BACKGROUND MODE (COMMENTED / INACTIVE)
-
-    <video id="backgroundVideo" autoplay muted loop>
-        <source src="bali-background-2.mov" src="" type="video/mp4">
-    </video>
-	
-	-->
-
-    <!-- IMAGE BACKGROUND MODE (ACTIVE) -->
+<div class="background">
 
     <img id="backgroundImage"
          src="YEP-countdown-daylight.png"
          width="100%"
          height="100%">
 
-    <!-- DARK OVERLAY -->
-
     <div class="overlay"></div>
 
 </div>
 
-<!-- MAIN CONTENT -->
 
-<div class="container">
+<!-- =====================================
+     HOURLY VIDEO PLAYER
+     ===================================== -->
+
+<video id="hourlyVideo"
+       muted
+       playsinline
+       preload="auto">
+
+    <source id="hourlyVideoSource"
+            src="Off Site Townhall.mp4"
+            type="video/mp4">
+
+</video>
+
+
+<!-- =====================================
+     COUNTDOWN SCREEN
+     ===================================== -->
+
+<div class="container" id="countdownScreen">
 
     <!-- SUBTITLE -->
 
@@ -254,8 +265,8 @@ html, body {
         </div>
 
         <div class="days-label">
-            DAYS
-            <br>TO GO
+            DAYS<br>
+            TO GO
         </div>
 
     </div>
@@ -277,7 +288,7 @@ html, body {
     </div>
 
 
-    <!-- COUNTDOWN -->
+    <!-- COUNTDOWN TIMER -->
 
     <div class="timer">
 
@@ -301,28 +312,33 @@ html, body {
 </div>
 
 
-<!-- COUNTDOWN SCRIPT -->
+<!-- =====================================
+     JAVASCRIPT
+     ===================================== -->
 
-<script>
+<script type="text/javascript">
+
 
 /* =====================================
-   COUNTDOWN CONFIGURATION
-   Change the target date and time here.
-   Month uses 0-11 (11 = December).
+   1. COUNTDOWN CONFIGURATION
    ===================================== */
 
 var targetDate = new Date(2026, 11, 16, 18, 0, 0);
 
+
 function updateCountdown() {
 
     var now = new Date();
+
     var difference = targetDate.getTime() - now.getTime();
 
     if (difference <= 0) {
+
         document.getElementById("days").innerHTML = "00";
         document.getElementById("hours").innerHTML = "00";
         document.getElementById("minutes").innerHTML = "00";
         document.getElementById("seconds").innerHTML = "00";
+
         return;
     }
 
@@ -330,19 +346,19 @@ function updateCountdown() {
 
     var days = Math.floor(totalSeconds / 86400);
 
-    var hours = Math.floor(
-        (totalSeconds % 86400) / 3600
-    );
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
 
-    var minutes = Math.floor(
-        (totalSeconds % 3600) / 60
-    );
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
 
     var seconds = totalSeconds % 60;
 
+
     function formatNumber(number) {
+
         return number < 10 ? "0" + number : number;
+
     }
+
 
     document.getElementById("days").innerHTML =
         formatNumber(days);
@@ -355,195 +371,224 @@ function updateCountdown() {
 
     document.getElementById("seconds").innerHTML =
         formatNumber(seconds);
+
 }
 
-/* ==========================================
-   YEP!! TIME-BASED BACKGROUND SWITCHER
-   ========================================== */
 
-/*
-   DAY     : 06:00 - 14:59
-   SUNSET  : 15:00 - 18:59
-   NIGHT   : 19:00 - 05:59
-
-   VIDEO MODE:
-   Uses 3 different MP4 files.
-
-   IMAGE MODE:
-   Uses 3 different JPG files.
-*/
-
-
-/* ==========================================
-   BACKGROUND MODE
-   ========================================== */
-
-/* Choose ONE mode only */
-
-// var backgroundMode = "video";
-
- var backgroundMode = "image";
-
-
-/* ==========================================
-   VIDEO FILES
-   ========================================== */
-
-var videoDay = "bali-background-daylight.mp4";
-var videoSunset = "bali-background-sunset.mp4";
-var videoNight = "bali-background-sunset.mp4";
-
-
-/* ==========================================
-   IMAGE FILES
-   ========================================== */
+/* =====================================
+   2. BACKGROUND IMAGE BY TIME
+   ===================================== */
 
 var imageDay = "YEP-countdown-daylight.png";
+
 var imageSunset = "YEP-countdown-sunset.png";
+
 var imageNight = "YEP-countdown-night.png";
 
-
-/* ==========================================
-   TIME CHECK
-   ========================================== */
 
 function updateBackground() {
 
     var now = new Date();
 
-    var currentHour = now.getHours();
+    var hour = now.getHours();
 
-    var selectedBackground = "";
-
-    var currentMode = "";
+    var selectedImage;
 
 
-    /* DAY: 06:00 - 14:59 */
+    if (hour >= 6 && hour < 15) {
 
-    if (currentHour >= 6 && currentHour < 15) {
-
-        currentMode = "day";
+        selectedImage = imageDay;
 
     }
 
-    /* SUNSET: 15:00 - 18:59 */
+    else if (hour >= 15 && hour < 19) {
 
-    else if (currentHour >= 15 && currentHour < 19) {
-
-        currentMode = "sunset";
+        selectedImage = imageSunset;
 
     }
-
-    /* NIGHT: 19:00 - 05:59 */
 
     else {
 
-        currentMode = "night";
+        selectedImage = imageNight;
 
     }
 
-
-    /* ======================================
-       SELECT VIDEO OR IMAGE
-       ====================================== */
-
-    if (backgroundMode == "video") {
-
-        if (currentMode == "day") {
-
-            selectedBackground = videoDay;
-
-        }
-
-        else if (currentMode == "sunset") {
-
-            selectedBackground = videoSunset;
-
-        }
-
-        else {
-
-            selectedBackground = videoNight;
-
-        }
-
-        changeVideo(selectedBackground);
-
-    }
-
-
-    else if (backgroundMode == "image") {
-
-        if (currentMode == "day") {
-
-            selectedBackground = imageDay;
-
-        }
-
-        else if (currentMode == "sunset") {
-
-            selectedBackground = imageSunset;
-
-        }
-
-        else {
-
-            selectedBackground = imageNight;
-
-        }
-
-        changeImage(selectedBackground);
-
-    }
-
-}
-
-
-/* ==========================================
-   CHANGE VIDEO
-   ========================================== */
-
-function changeVideo(fileName) {
-
-    var video = document.getElementById("backgroundVideo");
-
-    var source = document.getElementById("videoSource");
-
-    if (!video || !source) {
-        return;
-    }
-
-    if (source.getAttribute("src") != fileName) {
-
-        source.setAttribute("src", fileName);
-
-        video.load();
-
-        video.play();
-
-    }
-
-}
-
-
-/* ==========================================
-   CHANGE IMAGE
-   ========================================== */
-
-function changeImage(fileName) {
 
     var image = document.getElementById("backgroundImage");
 
-    if (!image) {
+    if (image.getAttribute("src") != selectedImage) {
+
+        image.setAttribute("src", selectedImage);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   HOURLY VIDEO CONFIGURATION
+   ========================================== */
+
+var hourlyVideoFile = "Off Site Townhall.mp4";
+
+var isVideoPlaying = false;
+var lastPlayedHour = "";
+
+
+/* ==========================================
+   PLAY HOURLY VIDEO
+   ========================================== */
+
+/* PLAYBACK SCHEDULE */
+var playbackSchedule = [
+	{ hour: 9, minute: 00 },
+	{ hour: 10, minute: 00 },
+	{ hour: 11, minute: 00 },
+	{ hour: 12, minute: 00 },
+	{ hour: 12, minute: 15 },
+	{ hour: 12, minute: 30 },
+	{ hour: 12, minute: 45 },
+	{ hour: 13, minute: 00 },
+	{ hour: 14, minute: 00 },
+	{ hour: 15, minute: 00 },
+    { hour: 15, minute: 15 },
+    { hour: 15, minute: 30 },
+	{ hour: 15, minute: 45 },
+    { hour: 16, minute: 00 },
+	{ hour: 17, minute: 00 }
+];
+
+function playHourlyVideo() {
+
+    // Prevent another playback while video is running
+    if (isVideoPlaying) {
         return;
     }
 
-    if (image.getAttribute("src") != fileName) {
+    var now = new Date();
 
-        image.setAttribute("src", fileName);
+    // Create a unique key for this date and hour
+	var timeKey =
+		now.getFullYear() + "-" +
+		now.getMonth() + "-" +
+		now.getDate() + "-" +
+		now.getHours() + "-" +
+		now.getMinutes();
 
+    // Prevent replay during the same hour
+    if (lastPlayedHour == timeKey) {
+        return;
     }
 
+    // Lock this hour BEFORE starting playback
+    lastPlayedHour = timeKey;
+    isVideoPlaying = true;
+
+    var video = document.getElementById("hourlyVideo");
+    var countdown = document.getElementById("countdownScreen");
+
+    if (!video || !countdown) {
+        isVideoPlaying = false;
+        return;
+    }
+
+    countdown.style.display = "none";
+    video.style.display = "block";
+
+    video.pause();
+    video.currentTime = 0;
+
+    video.src = hourlyVideoFile;
+    video.load();
+
+    video.muted = true;
+
+    try {
+        var playResult = video.play();
+
+        if (playResult && playResult.catch) {
+            playResult.catch(function() {
+                finishHourlyVideo();
+            });
+        }
+
+    } catch (error) {
+        finishHourlyVideo();
+    }
+}
+
+
+/* ==========================================
+   FINISH VIDEO AND RETURN TO COUNTDOWN
+   ========================================== */
+
+function finishHourlyVideo() {
+
+    var video = document.getElementById("hourlyVideo");
+    var countdown = document.getElementById("countdownScreen");
+
+    if (!isVideoPlaying) {
+        return;
+    }
+
+    isVideoPlaying = false;
+
+    if (video) {
+        video.pause();
+        video.style.display = "none";
+        video.currentTime = 0;
+    }
+
+    if (countdown) {
+        countdown.style.display = "block";
+    }
+
+    updateCountdown();
+    updateBackground();
+}
+
+
+/* ==========================================
+   VIDEO EVENTS
+   ========================================== */
+
+var promoVideo = document.getElementById("hourlyVideo");
+
+promoVideo.onended = function() {
+    finishHourlyVideo();
+};
+
+promoVideo.onerror = function() {
+    finishHourlyVideo();
+};
+
+
+/* ==========================================
+   CHECK CLOCK EVERY SECOND
+   ========================================== */
+
+function checkHourlyVideo() {
+    var now = new Date();
+    var shouldPlay = false;
+
+    for (var i = 0; i < playbackSchedule.length; i++) {
+        if (
+            playbackSchedule[i].hour == now.getHours() &&
+            playbackSchedule[i].minute == now.getMinutes()
+        ) {
+            shouldPlay = true;
+            break;
+        }
+    }
+
+    if (
+        shouldPlay &&
+        now.getSeconds() <= 10 &&
+        !isVideoPlaying
+    ) {
+        playHourlyVideo();
+    }
 }
 
 
@@ -554,12 +599,11 @@ function changeImage(fileName) {
 updateCountdown();
 updateBackground();
 
-
-/* CHECK EVERY 60 SECONDS */
-
+// Check the clock every second
+setInterval(checkHourlyVideo, 1000);
 setInterval(updateCountdown, 1000);
 setInterval(updateBackground, 60000);
-
+setInterval(checkHourlyVideo, 1000);
 
 </script>
 

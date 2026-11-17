@@ -503,7 +503,7 @@ function playHourlyVideo() {
     video.src = hourlyVideoFile;
     video.load();
 
-    video.muted = true;
+    video.muted = false;
 
     try {
         var playResult = video.play();
